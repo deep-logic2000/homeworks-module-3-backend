@@ -1,0 +1,4 @@
+server:
+  error:
+    path: /error
+  port: 9000
