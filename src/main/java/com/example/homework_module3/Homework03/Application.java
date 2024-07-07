@@ -32,16 +32,6 @@ public class Application {
 				.setSkipNullEnabled(true)
 				.setFieldAccessLevel(PRIVATE);
 
-//		mapper.createTypeMap(CustomerDtoRequest.class, Customer.class)
-//				.addMapping(CustomerDtoRequest::getName, Customer::setName)
-//				.addMapping(CustomerDtoRequest::getEmail, Customer::setEmail)
-//				.addMapping(CustomerDtoRequest::getAge, Customer::setAge)
-//				.addMapping(CustomerDtoRequest::getPhoneNumber, Customer::setPhoneNumber)
-//				.addMapping(CustomerDtoRequest::getPassword, Customer::setPassword);
-//		mapper.createTypeMap(Employee.class, EmployeeDto.class)
-//				.addMapping(Employee::getFirstName, EmployeeDto::setFirstName)
-//				.addMapping(Employee::getLastName, EmployeeDto::setLastName);
-
 		return mapper;
 	}
 	@Bean

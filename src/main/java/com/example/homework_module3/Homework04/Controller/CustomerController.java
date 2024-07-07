@@ -1,27 +1,27 @@
-package com.example.homework_module3.Homework03.Controller;
+package com.example.homework_module3.Homework04.Controller;
 
-import com.example.homework_module3.Homework03.Service.CustomerServiceImpl;
-import com.example.homework_module3.Homework03.Service.mappers.AccountDtoMapperRequest;
-import com.example.homework_module3.Homework03.Service.mappers.AccountDtoMapperResponse;
-import com.example.homework_module3.Homework03.Service.mappers.CustomerDtoMapperRequest;
-import com.example.homework_module3.Homework03.Service.mappers.CustomerDtoMapperResponse;
-import com.example.homework_module3.Homework03.domain.Account;
-import com.example.homework_module3.Homework03.domain.Customer;
-import com.example.homework_module3.Homework03.domain.dto.*;
+import com.example.homework_module3.Homework04.Service.CustomerServiceImpl;
+import com.example.homework_module3.Homework04.Service.mappers.AccountDtoMapperRequest;
+import com.example.homework_module3.Homework04.Service.mappers.AccountDtoMapperResponse;
+import com.example.homework_module3.Homework04.Service.mappers.CustomerDtoMapperRequest;
+import com.example.homework_module3.Homework04.Service.mappers.CustomerDtoMapperResponse;
+import com.example.homework_module3.Homework04.domain.Account;
+import com.example.homework_module3.Homework04.domain.Customer;
+import com.example.homework_module3.Homework04.domain.dto.*;
 import com.fasterxml.jackson.annotation.JsonView;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/customers")
@@ -35,6 +35,8 @@ public class CustomerController {
     private final CustomerDtoMapperResponse dtoMapperResponse;
     private final AccountDtoMapperRequest accountDtoMapperRequest;
     private final AccountDtoMapperResponse accountDtoMapperResponse;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public ResponseEntity<?> getAll(@RequestParam(defaultValue = "0") int pageNumber,
@@ -45,7 +47,6 @@ public class CustomerController {
         Long totalCustomersAmount = customersPage.getTotalElements();
         return ResponseEntity.ok().body(List.of(customersList, totalCustomersAmount));
     }
-
 
     @JsonView(Views.Detailed.class)
     @GetMapping("/{id}")
@@ -61,6 +62,7 @@ public class CustomerController {
     @PostMapping
     public ResponseEntity<?> createCustomer(@Valid @RequestBody CustomerDtoRequest customer) {
         Customer newCustomer = dtoMapperRequest.convertToEntity(customer);
+        newCustomer.setEncryptedPassword(passwordEncoder.encode(customer.getPassword()));
         try {
             Customer currentCustomer = customerServiceImpl.save(newCustomer);
             CustomerDtoResponse createdCustomer = dtoMapperResponse.convertToDto(currentCustomer);

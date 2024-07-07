@@ -29,3 +29,10 @@ VALUES (1, 1),
        (4, 3),
        (5, 2);
 
+
+INSERT INTO roles (role_name, customer_id)
+VALUES ('USER', 1),
+       ('ADMIN', 2),
+	   ('USER', 3),
+	   ('USER', 4),
+	   ('ADMIN', 5);

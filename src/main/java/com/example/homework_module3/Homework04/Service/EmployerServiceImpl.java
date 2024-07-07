@@ -1,7 +1,7 @@
-package com.example.homework_module3.Homework03.Service;
+package com.example.homework_module3.Homework04.Service;
 
-import com.example.homework_module3.Homework03.DAO.EmployersJpaRepository;
-import com.example.homework_module3.Homework03.domain.Employer;
+import com.example.homework_module3.Homework04.DAO.EmployersJpaRepository;
+import com.example.homework_module3.Homework04.domain.Employer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

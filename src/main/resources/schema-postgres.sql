@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS customer_employer;
 DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS employers;
+DROP TABLE IF EXISTS roles;
 
 CREATE TABLE customers
 (
@@ -9,10 +10,11 @@ CREATE TABLE customers
     name               VARCHAR(255)        NOT NULL,
     email              VARCHAR(255) UNIQUE NOT NULL,
     age                INT                 NOT NULL,
-    password           VARCHAR(255),
+    password           VARCHAR(128),
     phone_number       VARCHAR(20),
     created_date       TIMESTAMP NULL,
-    last_modified_date TIMESTAMP NULL
+    last_modified_date TIMESTAMP NULL,
+    enabled            BOOLEAN DEFAULT TRUE NOT NULL
 );
 
 CREATE TABLE employers
@@ -44,4 +46,12 @@ CREATE TABLE customer_employer
     PRIMARY KEY (customer_id, employer_id),
     FOREIGN KEY (customer_id) REFERENCES customers (id),
     FOREIGN KEY (employer_id) REFERENCES employers (id)
+);
+
+CREATE TABLE roles
+(
+    role_id   SERIAL PRIMARY KEY,
+    role_name VARCHAR(30),
+    customer_id BIGINT,
+    FOREIGN KEY (customer_id) REFERENCES customers (id)
 );

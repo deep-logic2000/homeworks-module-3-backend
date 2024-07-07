@@ -1,11 +1,11 @@
-package com.example.homework_module3.Homework03.Controller;
+package com.example.homework_module3.Homework04.Controller;
 
-import com.example.homework_module3.Homework03.Service.EmployerServiceImpl;
-import com.example.homework_module3.Homework03.Service.mappers.EmployerDtoMapperRequest;
-import com.example.homework_module3.Homework03.Service.mappers.EmployerDtoMapperResponse;
-import com.example.homework_module3.Homework03.domain.Employer;
-import com.example.homework_module3.Homework03.domain.dto.EmployerDtoRequest;
-import com.example.homework_module3.Homework03.domain.dto.EmployerDtoResponse;
+import com.example.homework_module3.Homework04.Service.EmployerServiceImpl;
+import com.example.homework_module3.Homework04.Service.mappers.EmployerDtoMapperRequest;
+import com.example.homework_module3.Homework04.Service.mappers.EmployerDtoMapperResponse;
+import com.example.homework_module3.Homework04.domain.Employer;
+import com.example.homework_module3.Homework04.domain.dto.EmployerDtoRequest;
+import com.example.homework_module3.Homework04.domain.dto.EmployerDtoResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,7 +45,6 @@ public class EmployerController {
 
         Employer newEmployer = new Employer(employerDtoRequest.getCompanyName(), employerDtoRequest.getCompanyAddress());
         Employer createdEmployer = employerServiceImpl.createEmployer(newEmployer);
-        log.info("created employer: " + createdEmployer);
         return ResponseEntity.ok(createdEmployer);
     }
 

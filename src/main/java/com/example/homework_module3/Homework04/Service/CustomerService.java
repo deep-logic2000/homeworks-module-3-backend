@@ -1,10 +1,12 @@
-package com.example.homework_module3.Homework03.Service;
+package com.example.homework_module3.Homework04.Service;
 
-import com.example.homework_module3.Homework03.domain.Account;
-import com.example.homework_module3.Homework03.domain.Customer;
+import com.example.homework_module3.Homework04.domain.Account;
+import com.example.homework_module3.Homework04.domain.Customer;
+import lombok.NonNull;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface CustomerService {
     Customer save(Customer customer);
@@ -19,6 +21,7 @@ public interface CustomerService {
 
     //    Page<Customer> getAllPageble(Pageable pageable);
     Page<Customer> getAllPageble(int pageNumber, int size);
+    Optional<Customer> getByLogin(String login);
 
     void deleteById(long id);
 
